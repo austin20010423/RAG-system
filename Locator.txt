@@ -1,0 +1,65 @@
+室內定位系統規劃目錄
+前置作業
+確認規格
+Locator設定
+Raspberry Pi
+AutoDB規劃
+路徑規劃
+區域規劃
+Locator / Text Server 安裝
+Training
+Position
+
+
+前置作業
+確認 Locator 的數量： 確定需要多少個 Locator。
+確定 Tag 的形式： 確認要使用的 Tag 的型號，不同型號對應不同的樹梅派測試程式。
+DHCP 或固定 IP： 確定是使用 DHCP 還是固定 IP。
+確認 Tag 及 Locator 的 major： 確認 Tag 和 Locator 的 major 參數。
+
+
+Locator 設定
+Raspberry Pi 3B： 使用樹莓派 3B 作為定位主機。
+燒 IMG 進樹梅派： 使用 Win32DiskImager.exe 將映像檔燒入 SD 卡中，然後插入樹莓派。
+SD卡插入樹莓派： 將 SD 卡插入樹莓派後，連接 HDMI 顯示器並開機。
+樹莓派搜尋 IP： 在 terminal 中輸入 $ hostname –I 來查找樹莓派的 IP。
+使用 Putty 連接： 使用 Putty 連接到樹莓派，登錄帳號為 pi，密碼為 psquare1234。
+修改 MAC： 使用指令修改藍牙 dongle 的 MAC 地址。
+貼紙位置： 將貼有 MAC 地址的標籤黏貼在對應的 Locator 上。
+shell
+Copy code
+# 修改 MAC 地址
+sudo /home/pi/Desktop/bdaddr/bdaddr -i hci0 10:01:00:00:01:02
+
+
+網路設定
+有線網路固定 IP： 修改 /etc/network/interfaces 配置檔設定有線網路的 IP。
+有線網路 DHCP： 修改 /etc/network/interfaces 配置檔設定有線網路使用 DHCP。
+WIFI 設定： 修改 /etc/wpa_supplicant/wpa_supplicant.conf 配置檔設定 WIFI 連接資訊。
+shell
+Copy code
+# 有線網路固定 IP 配置
+sudo nano /etc/network/interfaces
+
+
+场域連接
+確認定位主機的 IP： 在主機上使用 cmd 下的 ipconfig 指令來確認 IP。
+設定 S_uuid： 根據 minew App 獲取的 S_uuid 設定樹莓派的 p_config.txt。
+更改 serverIP： 使用 IPScanner 掃描樹莓派的 IP，然後使用 Putty 連入修改 serverIP。
+
+
+Beacon 設定
+填入藍牙 MAC： 將藍牙 MAC 填入 P2_BLE_PI.csv 文件中。
+
+
+測試
+測試連接是否正常： 測試定位主機和 Locator 之間的連接是否正常。
+測試變化速度： 測試每秒是否有 1-2 次的變化，以及遠距離與近距離的變化速度。
+
+
+Locator 裝殼說明
+準備物品： 包括十米線、樹梅派、外殼、螺絲、POE 供電器等。
+組裝外殼： 包括安裝外殼腳架、蓋子、樹梅派等。
+安裝電源： 根據供電方式選擇 USB 線或 POE 供電器。
+安裝十米線及 dongle： 將十米線連接到樹梅派及 dongle 上。
+安裝上蓋及螺絲： 將上蓋放在外殼上並用螺絲固定。
